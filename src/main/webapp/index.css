@@ -1,0 +1,139 @@
+.loginBtn {
+    border: 1px solid transparent;
+    background-image: none;
+}
+
+dt {
+    padding: 10px 0 0 0;
+}
+
+dt img {
+    width: 100px;
+    height: 100px;
+}
+
+dd {
+    height: 30px;
+    line-height: 30px;
+    color: #797979;
+    text-align: center;
+    margin-left: 0px;
+}
+
+.f_wechart1 {
+    width: 142px;
+    height: 171px;
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    -z-index: 2000;
+    text-align: center;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(document.documentElement.scrollTop)+200);
+}
+
+.f_wechart2 {
+    width: 142px;
+    height: 171px;
+    position: fixed;
+    top: 180px;
+    right: 20px;
+    -z-index: 2000;
+    text-align: center;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(document.documentElement.scrollTop)+200);
+}
+
+.f_wechart3 {
+    width: 142px;
+    height: 171px;
+    position: fixed;
+    top: 330px;
+    right: 20px;
+    -z-index: 2000;
+    text-align: center;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(document.documentElement.scrollTop)+200);
+}
+
+.f_wechart4 {
+    width: 142px;
+    height: 171px;
+    position: fixed;
+    top: 265px;
+    right: 220px;
+    -z-index: 2000;
+    text-align: center;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(document.documentElement.scrollTop)+200);
+}
+
+.f_wechart11 {
+    width: 142px;
+    height: 171px;
+    position: fixed;
+    top: 265px;
+    left: 20px;
+    -z-index: 2000;
+    text-align: center;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(document.documentElement.scrollTop)+200);
+}
+
+#wx-login-container {
+    transform: scale(0.5); /* 调整缩放比例 */
+    transform-origin: top left; /* 设置缩放的起点位置 */
+}
+
+.DTipBox {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    float: left;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.4;
+    -khtml-opacity: 0.4;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.DTip {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    float: right;
+    width: 100%;
+    text-align: right;
+    z-index: 5000;
+}
+
+.DTip img {
+    z-index: 2;
+    max-width: 90%;
+    border: none;
+    outline: none;
+}
+.slider-container {
+    width: 300px;
+    height: 25px;
+    background-color: #ccc;
+    position: relative;
+}
+.slider {
+    width: 50px;
+    height: 25px;
+    background-color: #0099FF;
+    position: absolute;
+    cursor: pointer;
+}
