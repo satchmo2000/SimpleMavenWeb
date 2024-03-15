@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML5 SVG的轻量级jQuery圆形进度条插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<link rel="stylesheet" href="css/jquery-pie-loader.css">
+</head>
+<body>
+	<header class="htmleaf-header">
+		<h1>HTML5 SVG的轻量级jQuery圆形进度条插件 <span>A lightweight jQuery plugin to create SVG pie loaders</span></h1>
+		<div class="htmleaf-links">
+			<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+			<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/html5/SVG/201602023098.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+		</div>
+	</header>
+	<section class="htmleaf-container">
+		<figure id="pie" data-behavior="pie-chart"></figure>
+	    <figure id="pie2" data-behavior="pie-chart"></figure>
+	    <figure id="pie3" data-behavior="pie-chart"></figure>
+	    <figure id="pie4" data-behavior="pie-chart"></figure>
+	    <figure id="pie5" data-behavior="pie-chart"></figure>
+	    <figure id="pie6" data-behavior="pie-chart"></figure>
+	    <figure id="pie7" data-behavior="pie-chart"></figure>
+	    <figure id="pie8" data-behavior="pie-chart"></figure>
+	</section>
+	<footer class="related">
+	    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+	    <a href="http://www.htmleaf.com/html5/SVG/201512162908.html">
+		  <img src="related/1.jpg" width="300" alt="基于SVG的轻量级js圆形进度条插件"/>
+		  <h3>基于SVG的轻量级js圆形进度条插件</h3>
+		</a>
+		<a href="http://www.htmleaf.com/html5/SVG/201508172426.html">
+		  <img src="related/2.jpg" width="300" alt="基于SVG的扁平风格圆形进度条插件"/>
+		  <h3>基于SVG的扁平风格圆形进度条插件</h3>
+		</a>
+	</footer>
+	
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery-pie-loader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var rand = function() {
+		        return Math.floor((Math.random() * 100) + 1)
+		      }
+
+		      $('*[data-behavior="pie-chart"]').each(function() {
+		        $(this).svgPie({
+		          percentage: rand()
+		        });
+
+		      });
+	});
+	</script>
+</body>
+</html>
