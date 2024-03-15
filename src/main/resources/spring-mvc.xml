@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="controller" />
+    <!--让springmvc不处理静态资源如.css .html .js文件,固定配置-->
+    <mvc:default-servlet-handler/>
+    <!--
+        支持mvc注解驱动
+            在springmvc中一般采用@RequestMapping注解来完成映射关系
+            要想使@RequestMapping注解生效，必须向上下文注册@DefaultAnnotationHandlerMappin
+            和一个AnnotationMethodHandlerAdapter实例
+            这两个实例分别在类级别和方法级别处理
+            而annotation-driver配置帮助我们自动完成上面两个实例的注入
+    -->
+    <mvc:annotation-driven/>
+    <!--    视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="InternalResourceViewResolver">
+        <!--        前缀-->
+        <property name="prefix" value="/"/>
+        <!--        后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="true"/>
+        <property name="favorParameter" value="false"/>
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="mediaTypes">
+            <props>
+                <prop key="json">application/json</prop>
+                <prop key="xml">application/xml</prop>
+            </props>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven >
+        <mvc:message-converters>
+            <!-- 这里配置alibaba 的fastjson -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+
+                <!-- 配置 -->
+                <property name="fastJsonConfig" ref="fastJsonConfig">
+
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 注入fastjson配置类 -->
+    <bean name="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <property name="serializerFeatures">
+            <list>
+                <!--                QuoteFieldNames———-输出key时是否使用双引号,默认为true-->
+                <!--                WriteMapNullValue——–是否输出值为null的字段,默认为false-->
+                <!--                WriteNullNumberAsZero—-数值字段如果为null,输出为0,而非null-->
+                <!--                WriteNullListAsEmpty—–List字段如果为null,输出为[],而非null-->
+                <!--                WriteNullStringAsEmpty—字符类型字段如果为null,输出为”“,而非null-->
+                <!--                WriteNullBooleanAsFalse–Boolean字段如果为null,输出为false,而非null-->
+
+                <value>WriteMapNullValue</value>
+                <value>QuoteFieldNames</value>
+                <!--                <value>WriteNullNumberAsZero</value>-->
+                <!--                <value>WriteNullListAsEmpty</value>-->
+                <!--                <value>WriteNullStringAsEmpty</value>-->
+                <!--                <value>WriteNullBooleanAsFalse</value>-->
+                <!--                <value>WriteDateUseDateFormat</value>-->
+            </list>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+    <propertys>
+        <property name="Server" value="task.bjrtjc.com"/>
+        <property name="DB" value="RTTR"/>
+        <property name="User" value="sasa"/>
+        <property name="Password" value="12345qwert!@#$%"/>
+        <property name="ReportServerUrl" value="http://localhost:1188/javaMavenWeb/Phone/uploadServerLoad"/>
+
+        <property name="FirstPage_release" value="redirect:/User/showUser.do"/>
+        <property name="FirstPage" value="redirect:/Tools/Index"/>
+        <property name="oauth_app_id" value="wx4c8b7e089074981e"/>
+        <property name="Redirect_uri" value="http://123.56.190.112/WeiXinCallback"/>
+        <property name="UnobtrusiveJavaScriptEnabled" value="true"/>
+        <property name="xxkDevId" value="693240810ea3481ab96547f85d649b26"/>
+        <property name="xxkDevKey" value="2bb947a9c8a24045a6e4febaede02729"/>
+        <!--微信小程序登录-->
+        <property name="wxAppID" value="wxeedffe1b91a2e209"/>
+        <property name="wxAppSecret" value="b3c9131492b5e9a10a87c16e3e8451a7"/>
+        <!--微信开放登录-->
+        <property name="openAppID" value="wxc71e2f9bbede8cb3"/>
+        <property name="openAppUri" value="http://www.help5g.com/Home/WeiXinCallback"/>
+        <property name="openAppSecret" value="fa6705e535622b8c9ced7ff570fefffc"/>
+
+        <property name="baiduAK" value="B1003aa46298ee6bb711671d68d502f6"/>
+        <property name="kjcl" value="/kjcl"/>
+        <property name="CompanyReg" value="1"/>
+        <property name="ShowQRCode" value="1"/>
+        <property name="ShowQRCode1" value="1"/>
+        <property name="ShowQRCode1001" value="1"/>
+        <!--<property name="Logo" value="rtlogo.png"/>
+        <property name="Title" value="RT工程项目管理云平台"/>-->
+        <property name="Logo0" value="jxj_full.png"/>
+        <property name="Title0" value="施工调度管理云平台"/>
+        <property name="WebSite" value="model.edesigner.cn"/>
+        <property name="actionName" value="Tools"/>
+        <property name="controlName" value="Index"/>
+        <property name="BigScreen" value="0"/>
+        <property name="ShowUserName" value="zjshow"/>
+        <property name="ShowPassword" value="123456"/>
+    </propertys>
+</application>
