@@ -21,9 +21,15 @@
         return md5e;
     }
 
-    function MakeSign(publicKey, Password){
+    function MakeSign(publicKey, Password, msSub){
         var curDate = new Date();
+        var curDateString0 = curDate.format("yyyyMMddhhmmss");
         var curSecond = curDate.getSeconds();
+        if(msSub < 0){
+            //当页面时间小于服务器时间时，要把时差补回去
+            curDate.setSeconds(curSecond - msSub);
+            curSecond = curDate.getSeconds();
+        }
         var PasswordMd5 = md5(Password);
         var curDateString = curDate.format("yyyyMMddhhmmss");
         console.log('PasswordMd5=', PasswordMd5, 'Current Date=', curDateString);
@@ -37,7 +43,9 @@
         crypt.setPublicKey(publicKey);
         var encryptedPassword = crypt.encrypt(Password);
 
-        return {CurrentDate: curDateString, Second: curSecond, Sign: md5e, EncryptedPassword: encryptedPassword};
+        var debugInfo = curSecond + ',' + curDateString0 + (msSub > 0 ? '-' : '+') + (Math.abs(msSub)) + '->' + curDateString + ',' + PasswordMd5 + '->' + md5e + ',Key=' + publicKey;
+
+        return {CurrentDate: curDateString, Second: curSecond, Sign: md5e, EncryptedPassword: encryptedPassword, DebugInfo: debugInfo};
     }
     window['SignUtil']['MakeSign'] = MakeSign;
 
