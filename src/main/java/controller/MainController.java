@@ -76,6 +76,8 @@ public class MainController {
         model.addAttribute("ShowQRCode1", Integer.parseInt(strShowQRCode1));
         model.addAttribute("ShowQRCode1001", Integer.parseInt(strShowQRCode1001));
         model.addAttribute("ShowQRCode1002", Integer.parseInt(strShowQRCode1002));
+        DateTime dtNow = new DateTime();
+        model.addAttribute("OpenDate", dtNow.toDateString("yyyy-MM-dd HH:mm:ss"));
 
         Result outCheck = new Result();
         if(client.CheckDB(outCheck)){
@@ -88,6 +90,9 @@ public class MainController {
             }
             if(client.GetSystemParameter(ClientServicesX.enumSystemParameter.enumProgramVersion_19, outValue) == ClientServicesX.enumErrorCode.enumSuccess){
                 model.addAttribute("Version1002", outValue.getStrValue());
+            }
+            if(client.GetSystemParameter(ClientServicesX.enumSystemParameter.enumDebugFlag, outValue) == ClientServicesX.enumErrorCode.enumSuccess){
+                model.addAttribute("DebugInfo", outValue.getStrValue());
             }
         }
         else{
@@ -106,11 +111,12 @@ public class MainController {
     }
 
     @RequestMapping(value="/Login",method= RequestMethod.POST)
-    public String Login(String UserName, String Password, String RSAPassword, String Second, String Sign, String Url, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+    public String Login(String UserName, String Password, String RSAPassword, String Second, String Sign, String DebugInfo, String Url, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         SessionManager sm = new SessionManager(request);
 
         String strSecond = IsNull(Second, "");
         String strSign = IsNull(Sign, "");
+        String strDebugInfo = IsNull(DebugInfo, "0");
 
         //传输密码的模式不安全，可以通过中转站获取密码后再通过服务器验证后返回给客户端
         String strRSAPassword = IsNull(RSAPassword, "");
@@ -139,6 +145,23 @@ public class MainController {
                 System.out.println(String.format("Check Date=%s,Restore Date=%s", new DateTime().toDateString("yyyyMMddHHmmss"), strDate));
 
                 boolean bValidPubKey = client.CheckSign(strPubKey, nSecond, strSign);
+                if(!strDebugInfo.equals("0")){
+                    String strLogFile = FileUtil.MapPath(request,"/Excel/UserLogin.log");
+                    WebLogging wl = new WebLogging(strLogFile);
+                    wl.WriteLine(String.format("输入：%s", strDebugInfo));
+
+                    String strPasswordMd5 = MD5Util.getMD5(Password).toLowerCase(Locale.ROOT);
+                    String strMd5e = EncryptUtil.MakeSignEx(strPubKey, strPasswordMd5, strDate);
+
+                    strDebugInfo = String.format("%s,%s,%s->%s,Key=%s" ,
+                            strSecond,
+                            strDate,
+                            strPasswordMd5,
+                            strMd5e,
+                            strPubKey);
+                    wl.WriteLine(String.format("输出：%s", strDebugInfo));
+                    wl.Close();
+                }
                 if(!bValidPubKey){
                     //无效公钥
                     String strErrorMessage = "无效的公钥（检查电脑的时间是否与Internet时间同步）或输入密码错误，解密失败！";
